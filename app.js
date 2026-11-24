@@ -245,16 +245,4 @@
   /* ---------- animaciones ---------- */
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: 0.12 });
   $$(".reveal").forEach(el => io.observe(el));
-  if (!reduced) {
-    const hero = $("#inicio"), cl = $("#clusterIn");
-    hero.addEventListener("pointermove", e => {
-      const r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-      cl.style.setProperty("--ry", `${x * 26}deg`); cl.style.setProperty("--rx", `${-y * 22}deg`);
-    });
-    hero.addEventListener("pointerleave", () => { cl.style.setProperty("--ry", "0deg"); cl.style.setProperty("--rx", "0deg"); });
-    $$(".tilt").forEach(el => {
-      el.addEventListener("pointermove", e => { const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; el.style.transform = `perspective(700px) rotateY(${x * 18}deg) rotateX(${-y * 14}deg) scale(1.03)`; });
-      el.addEventListener("pointerleave", () => (el.style.transform = ""));
-    });
-  }
 })();
